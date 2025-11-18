@@ -1,11 +1,8 @@
-# C++-Programming-101s
-
+C++ Programming 101s
 A–Z Beginner-Friendly C++ Programming Guide
 Goal: Teach you C++ from scratch in a simple, practical way — using clear explanations and small examples.
 You can use this as a GitHub README or as your personal notes.
-💡 Note: In this guide we’ll often write
-using namespace std;
-so we can use cout, cin, string, vector without std::.
+💡 In this guide we’ll often write using namespace std; so we can use cout, cin, string, vector without std::.
 Table of Contents
 A. About C++ & What You Need
 B. Basic Structure of a C++ Program
@@ -25,6 +22,7 @@ O. Object-Oriented Basics: Classes & Objects
 P. Parameters, References, and const
 Q. Quick Look at string & Characters
 R. Reading and Writing Files
+Project Workflow & File Checklist
 S. Standard Template Library (STL) Overview
 T. Templates & auto (Very Simple Intro)
 U. Using C++ Safely: RAII & Initialization
@@ -40,41 +38,42 @@ Desktop apps (Qt, etc.)
 Embedded systems (microcontrollers)
 High-performance systems (databases, trading systems, etc.)
 What you need to start
-A C++ compiler:
-Windows:
+A C++ compiler
+Windows
 MinGW-w64
 Or install via MSYS2
 Or use Visual Studio (with “Desktop development with C++” workload)
-macOS:
-Install Xcode Command Line Tools:
+macOS
+Xcode command-line tools:
 xcode-select --install
-Linux:
-Install g++ (Debian/Ubuntu):
+Linux (Debian/Ubuntu)
 sudo apt install build-essential
-A code editor or IDE:
-Beginner-friendly: Visual Studio Code, CLion, Qt Creator, or Visual Studio.
+A code editor or IDE
+Visual Studio Code
+CLion
+Qt Creator
+Visual Studio
 B. Basic Structure of a C++ Program
-Minimal C++ program using using namespace std;:
-#include <iostream>  // input/output library
+Minimal C++ program with using namespace std;:
+#include <iostream>
 using namespace std;
 
-int main() {         // program starts here
+int main() {
     cout << "Hello, world!\n";
-    return 0;        // optional in modern C++, but good to show
+    return 0;
 }
 Breakdown
 #include <iostream> – adds functionality for input/output.
 using namespace std; – lets us write cout instead of std::cout.
-int main() – the entry point of your program.
-{ ... } – defines a block of code.
+int main() – entry point of your program.
+{ ... } – block of code.
 cout << "Hello"; – prints text to the screen.
-; – every C++ statement ends with a semicolon.
+; – ends the statement.
 C. Compiling & Running Your Code
 Assume a file called hello.cpp.
-Using g++ (Linux, macOS, Windows with MinGW)
 g++ hello.cpp -o hello    # compile
 ./hello                   # run (Windows: hello.exe)
-If it compiles with no errors, you’ll see:
+If it compiles with no errors, you should see:
 Hello, world!
 D. Data Types & Variables
 A variable is a named box in memory that stores a value.
@@ -92,22 +91,21 @@ int main() {
     cout << "Age: " << age << "\n";
 }
 Notes:
-<< “streams” or “sends” data to cout.
+<< “streams” / sends data to cout.
 You can chain multiple << operators.
 E. Expressions & Operators
 Some core operators:
-Arithmetic: +, -, *, /, % (remainder)
+Arithmetic: +, -, *, /, %
 Comparison: ==, !=, <, >, <=, >=
 Logical: && (AND), || (OR), ! (NOT)
-Example:
 int a = 10;
 int b = 3;
-int sum = a + b;                 // 13
-int remainder = a % b;           // 1
-bool bigger = a > b;             // true
-bool between = (a > 5 && a < 20); // true
+int sum = a + b;
+int remainder = a % b;
+bool bigger = a > b;
+bool between = (a > 5 && a < 20);
 F. Flow Control – if, else, and switch
-if and else
+if / else
 #include <iostream>
 using namespace std;
 
@@ -130,15 +128,15 @@ if (mark >= 75) {
 } else {
     cout << "Fail\n";
 }
-switch (multiple discrete choices)
+switch
 #include <iostream>
 using namespace std;
 
 int main() {
     int day = 3;
     switch (day) {
-        case 1: cout << "Monday\n"; break;
-        case 2: cout << "Tuesday\n"; break;
+        case 1: cout << "Monday\n";    break;
+        case 2: cout << "Tuesday\n";   break;
         case 3: cout << "Wednesday\n"; break;
         default: cout << "Unknown day\n"; break;
     }
@@ -152,7 +150,7 @@ int main() {
     int i = 1;
     while (i <= 5) {
         cout << i << "\n";
-        i++;  // i = i + 1
+        i++;
     }
 }
 for loop
@@ -164,7 +162,7 @@ int main() {
         cout << i << "\n";
     }
 }
-do...while loop (runs at least once)
+do...while loop
 #include <iostream>
 using namespace std;
 
@@ -209,7 +207,6 @@ A function is a reusable block of code.
 #include <iostream>
 using namespace std;
 
-// function declaration & definition
 int add(int a, int b) {
     return a + b;
 }
@@ -218,9 +215,6 @@ int main() {
     int result = add(3, 4);
     cout << "3 + 4 = " << result << "\n";
 }
-Key ideas:
-int add(int a, int b) – function takes two ints and returns an int.
-return gives back the result.
 You can also have void functions (don’t return a value):
 #include <iostream>
 using namespace std;
@@ -233,8 +227,8 @@ int main() {
     greet();
 }
 J. Joining Code with Header & Source Files
-For bigger programs, you split code into files.
-Example structure:
+Split bigger programs into separate files.
+Example structure
 main.cpp
 math_utils.h
 math_utils.cpp
@@ -266,31 +260,25 @@ Compile:
 g++ main.cpp math_utils.cpp -o app
 ./app
 K. Keeping Things Organized with Namespaces
-The standard library lives in a namespace called std.
-Normally you would write:
-#include <iostream>
-
-int main() {
-    std::cout << "Hello\n";
-}
-But if you add:
-using namespace std;
-you can write:
+The standard library lives in namespace std.
+With using:
 #include <iostream>
 using namespace std;
 
 int main() {
     cout << "Hello\n";
 }
-For beginners: using namespace std; is okay in small files.
-In big projects, people often avoid it and use std::cout etc.
-You can create your own namespace:
+Custom namespace example:
+#include <iostream>
+using namespace std;
+
 namespace maths {
     int add(int a, int b) { return a + b; }
 }
 
 int main() {
     int result = maths::add(1, 2);
+    cout << result << "\n";
 }
 L. Lists: Arrays and vector
 C-style arrays
@@ -299,10 +287,9 @@ using namespace std;
 
 int main() {
     int arr[5] = {1, 2, 3, 4, 5};
-    cout << arr[0];  // first element
+    cout << arr[0] << "\n";  // first element
 }
-Downside: fixed size, no bounds checking.
-vector (recommended for beginners)
+vector (recommended)
 #include <vector>
 #include <iostream>
 using namespace std;
@@ -322,55 +309,51 @@ int main() {
 }
 M. Memory Basics: Stack vs Heap
 Stack – automatic storage:
-int x = 10;     // lives on the stack
-Heap – dynamic storage (you manually request and release).
-Old way (manual):
+int x = 10;   // on the stack
+Heap – manual dynamic storage:
 #include <iostream>
 using namespace std;
 
 int main() {
-    int* p = new int(5); // allocate
-    cout << *p;          // use
+    int* p = new int(5); // allocate on heap
+    cout << *p << "\n";  // use
     delete p;            // free
 }
-Modern C++ prefers containers and smart pointers (vector, string, unique_ptr, etc.) that manage memory for you.
-As a beginner, focus on:
-Using normal variables
-Using vector and string
-Avoiding new / delete until you understand them better.
+For beginners, prefer:
+Normal variables
+vector, string
+Avoid new / delete until later.
 N. Null Pointers and Smart Pointers (Beginner View)
-A pointer holds a memory address.
+Raw pointer
 #include <iostream>
 using namespace std;
 
 int main() {
     int value = 42;
-    int* ptr = &value;    // ptr points to value
-    cout << *ptr << "\n"; // prints 42 (dereference)
+    int* ptr = &value;
+    cout << *ptr << "\n";  // 42
 }
 nullptr
-Represents “no object”:
 #include <iostream>
 using namespace std;
 
 int main() {
     int* p = nullptr;
+
     if (p == nullptr) {
         cout << "No value yet.\n";
     }
 }
-Smart pointers (safer, modern C++)
+Smart pointer
 #include <iostream>
 #include <memory>
 using namespace std;
 
 int main() {
-    auto p = make_unique<int>(5);  // unique_ptr manages memory
+    auto p = make_unique<int>(5);
     cout << *p << "\n";
-} // memory automatically freed here
-As a beginner: just know they exist and are safer than raw new / delete.
+} // automatically freed
 O. Object-Oriented Basics: Classes & Objects
-A class defines a new type with data and functions.
 #include <iostream>
 #include <string>
 using namespace std;
@@ -381,7 +364,6 @@ private:
     int age;
 
 public:
-    // constructor
     Person(string name, int age)
         : name(name), age(age) {}
 
@@ -392,15 +374,11 @@ public:
 };
 
 int main() {
-    Person p("Alice", 25); // creates an object
+    Person p("Alice", 25);
     p.greet();
 }
-Key ideas:
-private – hidden data, only accessible inside the class.
-public – functions/data that users of the class can access.
-Constructor sets initial values.
 P. Parameters, References, and const
-By value (copy)
+By value
 #include <iostream>
 using namespace std;
 
@@ -413,11 +391,11 @@ int main() {
     increment(a);
     cout << a << "\n"; // still 5
 }
-By reference (no copy)
+By reference
 #include <iostream>
 using namespace std;
 
-void increment(int& x) { // reference
+void increment(int& x) {
     x++;
 }
 
@@ -427,7 +405,6 @@ int main() {
     cout << a << "\n"; // now 6
 }
 const reference
-Use when you don’t want to modify the value and want to avoid copying.
 #include <iostream>
 #include <string>
 using namespace std;
@@ -441,7 +418,6 @@ int main() {
     printName(n);
 }
 Q. Quick Look at string & Characters
-string
 #include <iostream>
 #include <string>
 using namespace std;
@@ -451,7 +427,7 @@ int main() {
     cout << s << "\n";
     cout << "Length: " << s.size() << "\n";
 }
-Characters (char)
+Characters:
 #include <iostream>
 using namespace std;
 
@@ -471,8 +447,14 @@ int main() {
         cout << c << "\n";
     }
 }
+Sample output:
+H
+e
+l
+l
+o
 R. Reading and Writing Files
-Writing to a file
+Write to a file
 #include <fstream>
 #include <string>
 using namespace std;
@@ -483,7 +465,7 @@ int main() {
 
     out << "Hello file!\n";
 }
-Reading from a file
+Read from a file
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -501,12 +483,74 @@ int main() {
         cout << line << "\n";
     }
 }
+Project Workflow & File Checklist
+Use this section as a repeatable checklist every time you start a new C++ console project.
+1. Create a project folder
+Example structure:
+C++Projects/
+  MyFirstApp/
+Inside MyFirstApp/ you can start with:
+main.cpp
+For slightly bigger projects:
+MyFirstApp/
+  src/
+    main.cpp
+    math_utils.cpp
+  include/
+    math_utils.h
+  build/        # (optional) compiled files
+  README.md
+2. Per-project workflow
+Plan quickly in plain English
+What should the program do?
+What inputs does it take?
+What outputs should it show?
+Create a minimal main.cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello from MyFirstApp!\n";
+    return 0;
+}
+Compile and run:
+g++ main.cpp -o app
+./app
+Add features step by step
+Add one new feature (e.g., menu, extra function).
+Compile & run after each change.
+Fix errors immediately.
+Split into .h and .cpp when it grows
+Put declarations in include/*.h.
+Put implementations in src/*.cpp.
+Keep main.cpp as the “traffic controller” of the app.
+Final tidy-up
+Remove unused variables/functions.
+Test with different inputs (including “weird” ones).
+Make sure compile warnings are minimal (or zero).
+3. File checklist for a small finished program
+At minimum for a console project:
+✅ main.cpp
+Has int main()
+Calls other functions/classes
+✅ One or more implementation files:
+e.g. src/math_utils.cpp, src/tasks.cpp
+✅ Matching header files:
+e.g. include/math_utils.h, include/task.h
+✅ README.md
+What the program does
+How to compile
+How to run
+Example input/output
+Optional but useful:
+✅ build/ or bin/ folder for executables
+✅ tests/ with small test programs
+✅ A .gitignore if you’re using Git
 S. Standard Template Library (STL) Overview
-The STL gives you powerful ready-made tools:
 Containers
 vector<T> – dynamic array
-string – dynamic text
-map<Key, Value> – key-value dictionary
+string – text
+map<Key, Value> – key/value
 set<T> – unique sorted values
 Algorithms
 sort(begin, end)
@@ -529,7 +573,6 @@ int main() {
     // Output: 1 2 5 9
 }
 T. Templates & auto (Very Simple Intro)
-Function templates
 #include <iostream>
 using namespace std;
 
@@ -542,23 +585,18 @@ int main() {
     cout << add(2, 3) << "\n";       // int
     cout << add(2.5, 3.1) << "\n";   // double
 }
-auto
-Let the compiler figure out the type:
+auto lets the compiler guess the type:
 #include <iostream>
 #include <string>
 using namespace std;
 
 int main() {
-    auto x = 5;                // int
-    auto y = 3.14;             // double
-    auto s = string("Hello");  // string
+    auto x = 5;               // int
+    auto y = 3.14;            // double
+    auto s = string("Hello"); // string
 }
 U. Using C++ Safely: RAII & Initialization
-RAII (Resource Acquisition Is Initialization):
-Acquire resources in a constructor
-Release them in the destructor
-Use objects to manage resources
-Example with file:
+RAII = Resource Acquisition Is Initialization.
 #include <fstream>
 using namespace std;
 
@@ -566,18 +604,17 @@ int main() {
     {
         ofstream out("log.txt");
         out << "Hello\n";
-    } // out goes out of scope, file is closed automatically
+    } // file closed automatically here
 }
-Always initialize your variables:
+Always initialize:
 #include <string>
 using namespace std;
 
 int main() {
-    int x{};        // x = 0
-    string s{};     // empty string
+    int x{};      // 0
+    string s{};   // empty
 }
 V. Vectors, Ranges, and Range-based Loops
-Range-based for loop
 #include <vector>
 #include <iostream>
 using namespace std;
@@ -588,13 +625,12 @@ int main() {
     for (int x : nums) {
         cout << x << "\n";
     }
-}
-With auto
-for (auto x : nums) {
-    cout << x << "\n";
+
+    for (auto x : nums) {
+        cout << x << "\n";
+    }
 }
 W. Working with Errors & Exceptions
-Throwing & catching exceptions
 #include <iostream>
 #include <stdexcept>
 using namespace std;
@@ -613,34 +649,23 @@ int main() {
         cout << "Error: " << ex.what() << "\n";
     }
 }
-For beginners: use exceptions mainly for serious errors (e.g., file not found, division by zero).
 X. eXplaining Common Compiler Errors
-Some classic errors:
 1. Missing semicolon
 error: expected ';' before 'return'
-Fix: check the line before return or the line indicated.
+Check the line before return.
 2. Undeclared identifier
 error: 'cout' was not declared in this scope
-Possible fixes:
-Forgot #include <iostream>
-Forgot using namespace std; (or use std::cout).
+Did you include <iostream>?
+Did you add using namespace std; or use std::cout?
 3. Type mismatch
 error: no matching function for call to 'add(double, int)'
-Fix: check the types you are passing to the function.
-4. Linker error (undefined reference)
+Check the function signature and argument types.
+4. Undefined reference (linker error)
 undefined reference to `add(int, int)'
-Often means:
-You declared a function in a header
-But did not define it in any .cpp
-Or you forgot to compile/link that .cpp file.
+Function declared but not defined
+Or the .cpp file with the definition wasn’t compiled/linked.
 Y. Your First Mini Project
-Try building a simple console app that:
-Stores a list of tasks (to-do list)
-Lets the user:
-Add tasks
-List tasks
-Mark a task as done
-Example sketch
+Goal: Simple console to-do list app.
 #include <iostream>
 #include <vector>
 #include <string>
@@ -658,7 +683,7 @@ int main() {
     do {
         cout << "\n1. Add task\n2. List tasks\n3. Mark done\n0. Exit\n> ";
         cin >> choice;
-        cin.ignore(); // clear newline
+        cin.ignore(); // clear leftover newline
 
         if (choice == 1) {
             Task t;
@@ -684,26 +709,20 @@ int main() {
 
     } while (choice != 0);
 }
-This project touches:
+Covers:
 struct
 vector
-User input
-Loops & conditionals
+Loops & menus
+Input handling
 Z. Zero to Next Steps – How to Keep Learning
-To go from beginner to intermediate:
-Practice small problems daily
-Simple calculators
-Guessing games
-Text menus
-File processing (e.g., reading a list of names from a file)
-Read other people’s code
-Look at simple C++ projects on GitHub.
-Learn more modern C++ features
-optional, variant, lambdas, unique_ptr, etc.
+Practice daily
+Calculators, guessing games, mini-menus, file readers.
+Read code
+Explore small C++ projects on GitHub.
+Learn more modern features
+unique_ptr, lambdas, optional, variant, array, unordered_map.
 Use tools
-Debugger (VS Code, CLion, Visual Studio)
-Static analysis (clang-tidy, etc.)
-Build real projects
-Console apps
-Small Qt GUI app
-Simple game using a library like SFML
+Debuggers (VS Code, CLion, Visual Studio).
+Static analysis (clang-tidy, sanitizers).
+Build projects
+Console apps → small Qt GUI → simple game (e.g. SFML).
